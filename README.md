@@ -18,7 +18,7 @@ Implementation of **Top-View / Multi-View Cattle Identification**
 |------|------|
 | **多視角融合** | 同時支援俯拍、側拍與斜 45° 角度影像，透過 *view-aware* head 融合特徵。 |
 | **輕量化部署** | 提供 *ONNX / TensorRT* 匯出腳本，可於邊緣 GPU (Jetson AGX) 即時推論。 |
-| **ID re-mapping** | 僅需少量耳標對照影像即可快速重編牛隻 ID。 |
+| **ID re-mapping** | 僅需對照毛色及花紋影像即可快速辨識牛隻 ID。 |
 | **擴充性** | 支援 Key-points、行為偵測 (mounting / lying) 之多任務 joint-training。 |
 
 ---
@@ -45,17 +45,16 @@ docker run --gpus all -it --shm-size=32g \
 apt update && apt install -y zip htop libgl1-mesa-glx
 pip install -r requirements.txt      # torch, opencv, thop ...
 ## 4. 推論 (Inference)
-bash
-複製
-編輯
+
+```bash
 python detect.py \
   --weights weights/cattle-id-p5.pt \
   --source data/test/video.mp4 \
-  --img 640 --conf 0.3 --view-merge
-輸出範例：
+  --img 640 --conf 0.30 --view-merge
+輸出示意
 
-<div align="center"> <img src="./figs/demo.gif" width="65%"> </div>
-## 5. 訓練 (Custom Training)
+<div align="center"><img src="./figs/demo.gif" width="65%"/></div>
+5. 訓練 (Custom Training)
 bash
 複製
 編輯
@@ -64,44 +63,37 @@ python train.py --workers 8 --device 0 \
   --img 640 640 \
   --cfg cfg/training/cattle-id-p5.yaml \
   --weights '' --name cattle-id-p5
-data/cattle-id.yaml 檔需包含：
+data/cattle-id.yaml 範例：
 
 yaml
 複製
 編輯
 train: /path/to/images/train
 val:   /path/to/images/val
-names: [cow]               # 單類別偵測
-耳標對照檔 (id_map.json) 格式：
-
-json
-複製
-編輯
-{
-  "0001": "ear_tag_128.jpg",
-  "0002": "ear_tag_257.jpg"
-}
-## 6. 匯出 (Export)
+names: [cow]
+6. 匯出 (Export)
 bash
 複製
 編輯
-# ↪ Pytorch → ONNX → TensorRT
 python export.py --weights cattle-id-p5.pt \
   --grid --simplify --end2end \
-  --img-size 640 640 \
-  --topk-all 200
-## 7. 引用 (Citation)
-pgsql
+  --img-size 640 640 --topk-all 200
+7. 引用 (Citation)
+bibtex
 複製
 編輯
 @misc{Guichou2025cattleID,
   title   = {Top-View Multi-View Cattle Identification},
-  author  = {Liang, Gui-Chou and et al.},
+  author  = {Liang, Gui-Chou and others},
   year    = {2025},
   note    = {GitHub repository},
   url     = {https://github.com/Guichou227/top-view-cattle-id}
 }
-## 8. 致謝 (Acknowledgements)
+複製
+編輯
+
+}
+8. 致謝 (Acknowledgements)
 本專案基於 YOLOv7，並參考以下開源成果：
 
 ultralytics/yolov5
