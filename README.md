@@ -44,6 +44,7 @@ docker run --gpus all -it --shm-size=32g \
 
 apt update && apt install -y zip htop libgl1-mesa-glx
 pip install -r requirements.txt      # torch, opencv, thop ...
+
 ## 4. 推論 (Inference)
 
 ```bash
@@ -54,7 +55,7 @@ python detect.py \
 輸出示意
 
 <div align="center"><img src="./figs/demo.gif" width="65%"/></div>
-5. 訓練 (Custom Training)
+## 5. 訓練 (Custom Training)
 bash
 複製
 編輯
@@ -71,14 +72,14 @@ yaml
 train: /path/to/images/train
 val:   /path/to/images/val
 names: [cow]
-6. 匯出 (Export)
+## 6. 匯出 (Export)
 bash
 複製
 編輯
 python export.py --weights cattle-id-p5.pt \
   --grid --simplify --end2end \
   --img-size 640 640 --topk-all 200
-7. 引用 (Citation)
+## 7. 引用 (Citation)
 bibtex
 複製
 編輯
@@ -89,11 +90,7 @@ bibtex
   note    = {GitHub repository},
   url     = {https://github.com/Guichou227/top-view-cattle-id}
 }
-複製
-編輯
-
-}
-8. 致謝 (Acknowledgements)
+## 8. 致謝 (Acknowledgements)
 本專案基於 YOLOv7，並參考以下開源成果：
 
 ultralytics/yolov5
@@ -103,6 +100,3 @@ Megvii-BaseDetection/YOLOX
 AlexeyAB/darknet
 
 感謝所有貢獻者！
-
-複製
-編輯
