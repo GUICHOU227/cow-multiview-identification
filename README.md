@@ -45,9 +45,10 @@ docker run --gpus all -it --shm-size=32g \
 apt update && apt install -y zip htop libgl1-mesa-glx
 pip install -r requirements.txt      # torch, opencv, thop ...
 
-## 4. 推論 (Inference)
-
-```bash
+4. 推論 (Inference)
+bash
+複製
+編輯
 python detect.py \
   --weights weights/cattle-id-p5.pt \
   --source data/test/video.mp4 \
@@ -55,7 +56,7 @@ python detect.py \
 輸出示意
 
 <div align="center"><img src="./figs/demo.gif" width="65%"/></div>
-## 5. 訓練 (Custom Training)
+5. 訓練 (Custom Training)
 bash
 複製
 編輯
@@ -64,7 +65,7 @@ python train.py --workers 8 --device 0 \
   --img 640 640 \
   --cfg cfg/training/cattle-id-p5.yaml \
   --weights '' --name cattle-id-p5
-data/cattle-id.yaml 範例：
+data/cattle-id.yaml 範例如下：
 
 yaml
 複製
@@ -72,7 +73,7 @@ yaml
 train: /path/to/images/train
 val:   /path/to/images/val
 names: [cow]
-## 6. 匯出 (Export)
+6. 匯出 (Export)
 bash
 複製
 編輯
