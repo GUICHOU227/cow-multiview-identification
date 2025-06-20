@@ -16,9 +16,9 @@ Implementation of **Top-View / Multi-View Cattle Identification**
 
 | 功能 | 說明 |
 |------|------|
-| **多視角融合** | 同時支援俯拍、側拍與斜 45° 角度影像，透過 *view-aware* head 融合特徵。 |
+| **多視角融合** | 同時支援俯拍從對牛隻不同視角拍攝影像，透過 *view-aware* head 融合特徵。 |
 | **軟硬合併轉出** | 提供 *ONNX / TensorRT* 匯出腳本，可於 Jetson AGX 邊緣 GPU 即時推讀。 |
-| **ID 重定義** | 僅需少量耳標對照影像即可快速重編牛隻 ID。 |
+| **ID 重定義** | 僅需觀察毛色、花紋對照影像即可快速重編牛隻 ID。 |
 | **擴充性** | 支援 Key-points、行為偵測 (mounting / lying) 之多任務 joint-training。 |
 
 ---
